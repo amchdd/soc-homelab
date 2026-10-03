@@ -1,0 +1,68 @@
+<group name="soc_lab,">
+  <rule id="100100" level="0">
+    <decoded_as>json</decoded_as>
+    <field name="lab" type="pcre2">^soc-homelab$</field>
+    <field name="origin" type="pcre2">^synthetic$</field>
+    <description>SOC lab structured fixture</description>
+  </rule>
+  <rule id="100101" level="5">
+    <if_sid>100100</if_sid>
+    <field name="lab_event" type="pcre2">^authentication_failure$</field>
+    <description>SOC lab authentication fixture for $(dstuser)</description>
+    <group>authentication_failed,</group>
+  </rule>
+  <rule id="100102" level="10" frequency="5" timeframe="60">
+    <if_matched_sid>100101</if_matched_sid>
+    <same_srcip />
+    <same_field>run_id</same_field>
+    <description>SOC lab repeated authentication fixtures from $(srcip)</description>
+    <mitre><id>T1110</id></mitre>
+    <group>authentication_failures,</group>
+  </rule>
+  <rule id="100103" level="7">
+    <if_sid>100100</if_sid>
+    <field name="lab_event" type="pcre2">^process_creation$</field>
+    <field name="process_name" type="pcre2">(?i)^(?:powershell|pwsh)(?:\.exe)?$</field>
+    <field name="command_line" type="pcre2">(?i)(?:^|\s)-(?:enc|encodedcommand)(?:\s|$)</field>
+    <description>SOC lab encoded PowerShell fixture requires contextual review</description>
+    <mitre><id>T1059.001</id></mitre>
+    <group>process_creation,</group>
+  </rule>
+  <rule id="100105" level="6">
+    <if_sid>550</if_sid>
+    <field name="file" type="pcre2">^/lab/protected/</field>
+    <description>SOC lab endpoint FIM: file modified</description>
+    <group>soc_lab_native_fim,</group>
+  </rule>
+  <rule id="100110" level="5">
+    <if_sid>5760</if_sid>
+    <user type="pcre2">^labuser$</user>
+    <description>SOC lab SSH password authentication failed for $(dstuser)</description>
+    <group>soc_lab_live_ssh,authentication_failed,</group>
+  </rule>
+  <rule id="100111" level="10" frequency="5" timeframe="60">
+    <if_matched_sid>100110</if_matched_sid>
+    <same_srcip />
+    <description>SOC lab repeated SSH password failures from $(srcip)</description>
+    <mitre><id>T1110</id></mitre>
+    <group>soc_lab_live_ssh,authentication_failures,</group>
+  </rule>
+  <rule id="100112" level="3">
+    <if_sid>5715</if_sid>
+    <user type="pcre2">^labuser$</user>
+    <description>SOC lab successful SSH authentication (context only)</description>
+    <group>soc_lab_live_ssh,authentication_success,</group>
+  </rule>
+  <rule id="100113" level="6">
+    <if_sid>554</if_sid>
+    <field name="file" type="pcre2">^/lab/protected/</field>
+    <description>SOC lab endpoint FIM: file created</description>
+    <group>soc_lab_native_fim,</group>
+  </rule>
+  <rule id="100114" level="6">
+    <if_sid>553</if_sid>
+    <field name="file" type="pcre2">^/lab/protected/</field>
+    <description>SOC lab endpoint FIM: file deleted</description>
+    <group>soc_lab_native_fim,</group>
+  </rule>
+</group>

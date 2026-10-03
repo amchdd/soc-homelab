@@ -1,0 +1,9 @@
+vendor/
+runtime/
+__pycache__/
+.env
+*.key
+*.pem
+*.log
+!evidence/ssh-auth.log
+*.evtx

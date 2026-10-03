@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "portfolio_version": "1.0.0",
+  "engine_version": "4.14.8",
+  "status": "passed",
+  "run_id": "bca2a1b54d3b4828babaab1ea9208424",
+  "started_at": "2026-09-28T23:48:12.704694+00:00",
+  "collection_started_at": "2026-09-28T23:49:35.936552+00:00",
+  "completed_at": "2026-09-28T23:49:46.583959+00:00",
+  "scope": "isolated_containers",
+  "manager_image": "wazuh/wazuh-manager:4.14.8@sha256:6b53d4cc5c013b08157471d11f7a7c2c45f9e8238f3958e3b2f04ec1773ecbd4",
+  "configuration_sha256": {
+    ".gitattributes": "7b15707079cfa2d273d2890f9a862b0bc8bdfa76f872ce2c1f8a7e24fb899117",
+    "compose.yaml": "92f178b25c78109a68bac0eb52d6ba5b827e783e68a7becd60e7b508dd7aa91f",
+    "config/ossec.conf": "79820badd08605ea1ba5ce0d1c22d2c7c9adfa0421660d99f3e4b3567005b59c",
+    "config/agent.conf": "eda1b90837a7ce61278a55c8c0f051fdf2fb0753ff668dd625aa19777aa8c2ac",
+    "rules/soc_lab.xml": "ffb92652216d7c9a27436e416a014d4cf31313c11f2f147c787ffe4538bed730",
+    "endpoint/Dockerfile": "4f6e60978cfd1be45c8c3db86203c711ee224d60f73c37502e92ae607debe4b0",
+    "endpoint/sshd_config": "f6ff8a16ca7bb4524f5d252f51553964e4bd676d78244bcd55be3be212c8a557",
+    "endpoint/rsyslog.conf": "f818ddecc63b7682bb07d4a9082f8572cbd5753750b4a893ba895a4c5cde7cd3",
+    "endpoint/start.sh": "81eeeffdd92376f075c80aefafbf3d0faaded2220bb33dad0165ee31ceef6323",
+    "endpoint/askpass.sh": "153067ad6164b2ea97fed11dff29b218a9dad04ff9983e5e50805d34456dd8a9",
+    "scripts/common.py": "9b3d1f24e3ed267fe95df9c744cbde3e6eac3ada25937ed95fc567b1a6ab0db1",
+    "scripts/export_evidence.py": "5506f0fdd6cd80d56d162df44d75be6a01497fe131a847f7aecb2cf56383e323",
+    "scripts/generate_events.py": "4ec2f0be1d8014b67032be6a14f483bb2c035d4e801e080ff793df7c9f5c697a",
+    "scripts/run_lab.py": "bfc31d331c2b3585a31e9dbcbbfdfb59932d59992c02f07a30b44b5f4a93ad50",
+    "scripts/test_tools.py": "381f7a954da148c070a84c61e769b9b194293980e14f5c37c6a0eb61bcbc7a55",
+    "scripts/triage.py": "b944ee562c5f624e0c583e48e0254d6c771002ec8685657fcf4dd2bc344e9011",
+    "scripts/verify_rules.py": "4cf1ca268d4e50764209e98f2bd8e439f14570a38130484d44ff235fff9d5250"
+  },
+  "endpoint_base_image": "wazuh/wazuh-agent:4.14.8@sha256:32215f51b62b072b9ff010d1c03da4e1f586947aaa686c40b927509fc85855cc",
+  "endpoint_image_id": "2259d044cf1ec48e799d955cac348b7b9619b05797033e46b6bdb89de36c78a9",
+  "ssh_operations": {
+    "failed_passwords": 8,
+    "authorized_logins": 1,
+    "source_ip": "127.0.0.1"
+  },
+  "rule_test_count": 18,
+  "alert_count": 21,
+  "limits": [
+    "No Windows/Sysmon endpoint",
+    "No indexer/dashboard",
+    "No automatic containment"
+  ],
+  "artifacts_sha256": {
+    "alerts.jsonl": "a08b69334932a499959a2177be85093c4844f7152bbf486373d94b85634fcbbb",
+    "rule-tests.json": "9547c913b9e7c95d7bfcf230971ed340b562ae5d74173c4e77382038b945d13e",
+    "triage.md": "bae8f7ae172f619afecd0d568b5e5436a0c5b738c76c593f945baed620eb9450",
+    "report.html": "ba25c110e0334945118f0d69d2f3691554c6f97d221b1824091aa338c449978f",
+    "ssh-auth.log": "9c4883dd23dd92121003774a8adbc0590ac83d0c8d66578f5898a480de737762",
+    "fim-changes.json": "37d28b053058bbf0a914afa756345677f10f2e72c2727f3b5af13d53944ff994"
+  }
+}

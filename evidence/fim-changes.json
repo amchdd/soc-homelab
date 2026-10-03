@@ -1,0 +1,12 @@
+{
+  "/lab/protected/bca2a1b54d3b4828babaab1ea9208424-modified.conf": {
+    "sha256_before": "e470ca7ce25516bf5a1845dfa629bb06b8d4dac1922c7b95415f84d8e44bf378",
+    "sha256_after": "3499edcbfe9d0c4baf144d31bb6bbb53bc0185c0d9ccaf72cdf6018d9c749532"
+  },
+  "/lab/protected/bca2a1b54d3b4828babaab1ea9208424-created.conf": {
+    "sha256_after": "454e261d30789af028e1f54d42b9aa74cf17b496784afb04ad9013d624810cf3"
+  },
+  "/lab/protected/bca2a1b54d3b4828babaab1ea9208424-deleted.conf": {
+    "sha256_after": "e470ca7ce25516bf5a1845dfa629bb06b8d4dac1922c7b95415f84d8e44bf378"
+  }
+}

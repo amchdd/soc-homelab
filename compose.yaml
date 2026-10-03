@@ -1,0 +1,57 @@
+name: soc-homelab
+services:
+  manager:
+    image: wazuh/wazuh-manager:4.14.8@sha256:6b53d4cc5c013b08157471d11f7a7c2c45f9e8238f3958e3b2f04ec1773ecbd4
+    platform: linux/amd64
+    hostname: soc-manager
+    restart: "no"
+    mem_limit: 2g
+    pids_limit: 1024
+    networks: [lab]
+    healthcheck:
+      test: ["CMD-SHELL", "/var/ossec/bin/wazuh-control status | awk '/wazuh-analysisd is running/ {a=1} /wazuh-logcollector is running/ {l=1} END {exit !(a && l)}'"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+    volumes:
+      - manager_etc:/var/ossec/etc
+      - manager_logs:/var/ossec/logs
+      - manager_queue:/var/ossec/queue
+      - manager_multigroups:/var/ossec/var/multigroups
+      - ./config/ossec.conf:/wazuh-config-mount/etc/ossec.conf:ro
+      - ./config/filebeat-idle.sh:/etc/services.d/filebeat/run:ro
+      - ./rules/soc_lab.xml:/var/ossec/etc/rules/soc_lab.xml:ro
+      - ./runtime/events.jsonl:/lab/events.jsonl:ro
+  endpoint:
+    build: ./endpoint
+    platform: linux/amd64
+    hostname: soc-endpoint
+    restart: "no"
+    mem_limit: 768m
+    pids_limit: 256
+    networks: [lab]
+    depends_on:
+      manager:
+        condition: service_healthy
+    environment:
+      WAZUH_MANAGER_SERVER: manager
+      WAZUH_AGENT_NAME: soc-endpoint
+    healthcheck:
+      test: ["CMD-SHELL", "/var/ossec/bin/wazuh-control status | grep -q 'wazuh-agentd is running'"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+    volumes:
+      - agent_etc:/var/ossec/etc
+      - ./config/agent.conf:/wazuh-config-mount/etc/ossec.conf:ro
+      - ./runtime/protected:/lab/protected:ro
+# No host ports, host network, privileged containers or Docker socket mounts.
+networks:
+  lab:
+    internal: true
+volumes:
+  manager_etc:
+  manager_logs:
+  manager_queue:
+  manager_multigroups:
+  agent_etc:
